@@ -53,6 +53,7 @@ app.get("/products", (req, res) => {
   });
 });
 
+// POST endpoint
 app.post("/products", (req, res) => {
   // count of POST request
   console.log("products POST: received request");
@@ -110,6 +111,7 @@ app.post("/products", (req, res) => {
   });
 });
 
+// DELETE endpoint
 app.delete("/products", (req, res) => {
   try {
     const jsonData = [];

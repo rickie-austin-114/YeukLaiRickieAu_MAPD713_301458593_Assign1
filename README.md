@@ -1,4 +1,4 @@
-To start the application
+To start the application:
 npm start
 
 Debug:

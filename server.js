@@ -4,8 +4,9 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 require("dotenv").config();
 
+// get 
 const PORT = process.env.PORT;
-const FILE_PATH = "data.json";
+const FILE_PATH = process.env.FILE_PATH;
 
 let getCount = 0;
 let postCount = 0;
@@ -37,9 +38,11 @@ app.get("/products", (req, res) => {
 
       // Check if the data exists and is an array
       if (Array.isArray(jsonData)) {
+        // return the data in data.json file the format is valid
         console.log("products GET: sending response");
         res.status(200).json(jsonData);
       } else {
+        // error handling for invalid data structure in data.json
         console.error('The "message" key is not an array in the JSON file.');
         console.log("products GET: sending response");
         res.status(500).send("The content is not an array in the JSON file.");
@@ -62,6 +65,8 @@ app.post("/products", (req, res) => {
 
   // Read the JSON file
   fs.readFile(FILE_PATH, "utf8", (err, data) => {
+
+    // handle file read error
     if (err) {
       console.error("Error reading file:", err);
       console.log("products POST: sending response");
@@ -134,6 +139,7 @@ app.delete("/products", (req, res) => {
   }
 });
 
+// message upon launch
 console.log(
   `Server is listening at http://127.0.0.1:${PORT}
 Endpoints:
@@ -141,4 +147,5 @@ http://127.0.0.1:${PORT}/products method: GET, POST, DELETE
 `
 );
 
+// start the app
 app.listen(PORT);

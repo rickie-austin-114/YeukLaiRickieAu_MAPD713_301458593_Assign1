@@ -92,7 +92,6 @@ app.post("/products", (req, res) => {
             res.status(500).send(`Error writing file: ${err}`);
             return;
           }
-          console.log("Data has been updated and saved successfully!");
         });
 
         console.log("products POST: sending response");
@@ -124,7 +123,6 @@ app.delete("/products", (req, res) => {
         console.log("products DELETE: sending response");
         res.status(500).send(`Error writing file: ${err}`);
       }
-      console.log("Data has been updated and saved successfully!");
     });
     res.status(200).send("content has been deleted");
   } catch (error) {
@@ -135,7 +133,7 @@ app.delete("/products", (req, res) => {
 });
 
 console.log(
-`Server is listening at http://127.0.0.1:${PORT}
+  `Server is listening at http://127.0.0.1:${PORT}
 Endpoints:
 http://127.0.0.1:${PORT}/products method: GET, POST, DELETE
 `

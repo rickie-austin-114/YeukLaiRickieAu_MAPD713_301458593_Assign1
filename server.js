@@ -42,9 +42,7 @@ app.get("/products", (req, res) => {
       } else {
         console.error('The "message" key is not an array in the JSON file.');
         console.log("products GET: sending response");
-        res
-          .status(500)
-          .send('The content is not an array in the JSON file.');
+        res.status(500).send("The content is not an array in the JSON file.");
       }
     } catch (error) {
       // other error
@@ -54,7 +52,6 @@ app.get("/products", (req, res) => {
     }
   });
 });
-
 
 app.post("/products", (req, res) => {
   // count of POST request
@@ -114,12 +111,33 @@ app.post("/products", (req, res) => {
   });
 });
 
+app.delete("/products", (req, res) => {
+  try {
+    const jsonData = [];
+    // Convert the updated JSON object back to a JSON string
+    const updatedData = JSON.stringify(jsonData, null, 2);
 
+    // Write the updated JSON data back to the file
+    fs.writeFile(FILE_PATH, updatedData, "utf8", (err) => {
+      if (err) {
+        console.error("Error writing file:", err);
+        console.log("products DELETE: sending response");
+        res.status(500).send(`Error writing file: ${err}`);
+      }
+      console.log("Data has been updated and saved successfully!");
+    });
+    res.status(200).send("content has been deleted");
+  } catch (error) {
+    console.error("Error parsing JSON:", error);
+    console.log("products DELETE: sending response");
+    res.status(500).send(`Error parsing JSON: ${error}`);
+  }
+});
 
 console.log(
-  `Server is listening at http://127.0.0.1:${PORT}
+`Server is listening at http://127.0.0.1:${PORT}
 Endpoints:
-http://127.0.0.1:${PORT}/products method: GET, POST
+http://127.0.0.1:${PORT}/products method: GET, POST, DELETE
 `
 );
 

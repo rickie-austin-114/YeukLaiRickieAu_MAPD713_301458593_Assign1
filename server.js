@@ -79,12 +79,12 @@ app.post("/products", (req, res) => {
 
       // Validate whether the json data is an array
       if (Array.isArray(jsonData)) {
-        // check whether request body is empty
+        // check whether request body is valid
         if (!!req.body) {
           jsonData.push(req.body);
         } else {
           console.log("products POST: sending response");
-          res.status(400).send("Request body empty");
+          res.status(400).send("Invalid request body");
         }
 
         // Convert the updated JSON object back to a JSON string

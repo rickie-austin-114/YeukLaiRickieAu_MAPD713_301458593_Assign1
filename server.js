@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const fs = require("fs");
 require('dotenv').config();
 
 const PORT = process.env.PORT;
@@ -45,7 +46,11 @@ app.get("/products", (req, res) => {
 
 
 
-
+console.log(
+`App listening on port ${PORT}
+endpoints: /products GET
+`
+)
 
 app.listen(PORT);
 
